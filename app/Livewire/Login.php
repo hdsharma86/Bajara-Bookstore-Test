@@ -34,10 +34,19 @@ class Login extends Component
 
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/user-dashboard');
         } else {
             // Authentication failed
             session()->flash('error', 'Invalid credentials.');
         }
+    }
+
+    /**
+     * User logout here
+     */
+    public function logout(){
+        Auth::logout();
+        // Redirect to the login page after logout...
+        return redirect()->intended('/login');
     }
 }
