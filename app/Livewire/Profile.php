@@ -23,6 +23,9 @@ class Profile extends Component
         $this->email = Auth::user()->email;
     }
 
+    /**
+     * Update user profile.
+     */
     public function profile(){
 
         $this->validate();

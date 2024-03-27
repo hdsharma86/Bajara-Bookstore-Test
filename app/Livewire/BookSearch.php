@@ -12,6 +12,10 @@ class BookSearch extends Component
     public $query;
     public $favBooks = [];
 
+    /**
+     * Component mount here
+     * loading of all the books based on the auth check.
+     */
     public function mount()
     {
         $this->books = Book::all();
@@ -21,6 +25,9 @@ class BookSearch extends Component
         }
     }
 
+    /**
+     * Function to search & display books.
+     */
     public function search(){
         $inputQuery = $this->query;
         $books = Book::query()
@@ -36,12 +43,18 @@ class BookSearch extends Component
         return $this->books;
     }
 
+    /**
+     * Function to add any book into the favourite section.
+     */
     public function addToFav($bookId){
         $userId = Auth::id();
         $user = User::find($userId);
         $user->books()->attach($bookId);
     }
 
+    /**
+     * Redirection to any url.
+     */
     public function redirectTo($path = '/'){
         return redirect()->intended('/book-detail');
     }
