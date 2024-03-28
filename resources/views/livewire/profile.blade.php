@@ -1,5 +1,4 @@
 <div>
-    @livewire('navigation')
     <div class="min-h-screen flex items-center justify-center w-full dark:bg-gray-300">
     <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">

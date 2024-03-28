@@ -9,7 +9,7 @@
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
             @auth
-                <li><a wire:navigate href="#">My favorites</a></li>
+                <li><a wire:navigate href="/my-favourites">My favorites</a></li>
                 <li><a wire:navigate href="/user-profile">My Profile</a></li>
                 <li><a wire:navigate href="/user-logout">Logout</a></li>
             @else

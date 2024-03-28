@@ -18,11 +18,30 @@ class BookSearch extends Component
      */
     public function mount()
     {
+        $this->loadBooks();
+    }
+
+    public function loadBooks(){
         $this->books = Book::all();
         if (Auth::check()) {
             $user = Auth::user()->load('books');
             $this->favBooks = $user->books;
+
+            foreach($this->books as $book){
+                if($this->isFavourite($book->id)){
+                    $book->isFav = true;
+                } else {
+                    $book->isFav = false;
+                }
+            }
         }
+    }
+
+    public function isFavourite($bookId){
+        $filteredArray = array_filter($this->favBooks->toArray(), function ($value) use ($bookId) {
+            return $value['id'] === $bookId;
+        });
+        return count($filteredArray) > 0 ? true : false;
     }
 
     /**
@@ -50,13 +69,25 @@ class BookSearch extends Component
         $userId = Auth::id();
         $user = User::find($userId);
         $user->books()->attach($bookId);
+        $this->loadBooks();
+    }
+
+    public function removeFav($bookId){
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $user->books()->detach($bookId);
+        $this->loadBooks();
     }
 
     /**
      * Redirection to any url.
      */
-    public function redirectTo($path = '/'){
-        return redirect()->intended('/book-detail');
+    public function redirectTo($id = null){
+        if (Auth::check()) {
+            return redirect()->to(route('book-detail',$id));
+        } else {
+            return redirect()->to(route('login'));
+        }
     }
 
     public function render()

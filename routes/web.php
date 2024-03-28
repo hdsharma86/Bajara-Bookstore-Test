@@ -7,6 +7,8 @@ use App\Livewire\Register;
 use App\Livewire\UserDashboard;
 use App\Livewire\Profile;
 use App\Livewire\BookDetail;
+use App\Livewire\Favourite;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', Home::class);
 Route::get('/login', Login::class)->name('login');
@@ -15,5 +17,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user-logout', [Login::class, 'logout']);
     Route::get('/user-profile', Profile::class);
     Route::get('/user-dashboard', UserDashboard::class);
-    Route::get('/book-detail', BookDetail::class);
+    Route::get('/my-favourites', Favourite::class);
+    Route::get('/book-detail/{id}', BookDetail::class)->name('book-detail');
 });
+
+Route::get('{view}', [AdminController::class, 'index'])->where('view', '(.*)');
