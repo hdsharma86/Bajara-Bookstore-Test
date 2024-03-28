@@ -1,5 +1,5 @@
 <div>
-<div class="w-1/4 p-4 mx-auto text-center">
+<div class="w-1/3 p-4 mx-auto text-center">
     <div>
         <form wire:submit.prevent="search">
             <label class="input input-bordered flex items-center gap-2 mt-3 w-80">
@@ -23,11 +23,11 @@
                         <div class="card-actions justify-end">
                             @auth
                                 @if($book->isFav)
-                                    <button wire:click="removeFav({{$book->id}})" class="text-green-700">
+                                    <button wire:click="removeFav({{$book->id}})" class="btn text-green-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                     </button>
                                 @else
-                                    <button wire:click="addToFav({{$book->id}})" class="text-red-700">
+                                    <button wire:click="addToFav({{$book->id}})" class="btn text-red-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                     </button>
                                 @endif
