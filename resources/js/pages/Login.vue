@@ -4,7 +4,7 @@
             <div class="card-body">
                 <p class="text-red-900">{{ errorMessage }}</p>
                 <form @submit.prevent="handleSubmit">
-                    <h2 class="card-title">Admin Login!</h2>
+                    <h2 class="card-title">Admin Login (VueJs)!</h2>
                     <div class="py-3">
                         <input v-model="form.email" name="email" type="text" placeholder="Account" class="input input-bordered w-full max-w-xs" autocomplete="off" />
                     </div>
@@ -32,7 +32,7 @@ const handleSubmit = () => {
     .then((response) => {
         console.log('Error', response);
         if(!response.error){
-            router.push({name: 'admin.dashboard'})
+            router.push({name: 'admin.users'})
         } else {
             errorMessage.value = response.error;
         }

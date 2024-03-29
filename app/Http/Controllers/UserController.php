@@ -18,10 +18,8 @@ class UserController extends Controller
     /**
      * Function to fetch single user detail.
      */
-    public function fetchUserDetail(){
-        $id = request('id');
-        $user = User::where('id', $id)->get();
-        return $user;
+    public function fetchUserDetail(Request $request){
+        return $request->user();
     }
 
     /**
@@ -51,5 +49,20 @@ class UserController extends Controller
      */
     public function delete(User $user){
         return $user->delete();
+    }
+
+    public function profile(Request $request, $id){
+        if($id){
+
+            $user = User::find($id);
+            $user->name = $request->name;
+
+            if($request->password){
+                $user->password = bcrypt($request->password);
+            }
+            
+            $user->save();
+            return $user;
+        }
     }
 }

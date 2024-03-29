@@ -1,25 +1,34 @@
 <div>
-<div class="w-1/3 p-4 mx-auto text-center">
-    <div>
+<div class="px-9 pt-3 mx-auto text-center">
+    <div class="card">
         <form wire:submit.prevent="search">
-            <label class="input input-bordered flex items-center gap-2 mt-3 w-80">
-                <input wire:model="query" type="text" name="query" class="grow" placeholder="Search" />
-                <button type="submit" class="btn ml-16">Search</button>
-            </label>
+            <div class="join w-40">
+                <input name="query" class="input input-bordered join-item border-solid" placeholder="Search"/>
+                <button type="submit" class="btn join-item border-solid">Search</button>
+            </div>
         </form>
     </div>
 </div>
 
 <div class="w-full p-9">
     @if (count($books) > 0)
-        <div class="grid grid-cols-4 gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             @foreach ($books as $book)
                 <div class="card bg-base-100 shadow-xl">
-                    <figure><img src="/img/book.jpg"
-                            alt="Shoes" /></figure>
+                    @if (count($book->images) > 0)
+                        @foreach($book->images as $image)
+                        <figure>
+                            <img src="/img/{{$image->name}}" alt="Book" />
+                        </figure>
+                        @endforeach
+                    @else
+                        <figure>
+                            <img src="/img/book.jpg" alt="Book" />
+                        </figure>
+                    @endif
                     <div class="card-body">
                         <h2 class="card-title">{{ $book->name }}</h2>
-                        <p>{{ Str::limit($book->description, $limit = 30, $end = '...') }}</p>
+                        <p class="text-sm">{{ Str::limit($book->description, $limit = 150, $end = '...') }}</p>
                         <div class="card-actions justify-end">
                             @auth
                                 @if($book->isFav)
@@ -34,7 +43,7 @@
                                 
                                 <button wire:click="redirectTo({{$book->id}})" class="btn btn-primary">Read More</button>
                             @else
-                                <button wire:click="redirectTo" class="btn btn-primary">Read More</button>
+                                <button wire:click="redirectTo" class="btn btn-sm bg-blue-500 text-white rounded-full hover:bg-yellow-500 hover:text-black">Read More</button>
                             @endauth
                         </div>
                     </div>

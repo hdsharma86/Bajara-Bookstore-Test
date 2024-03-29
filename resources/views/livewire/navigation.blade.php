@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar sticky top-0 z-40 bg-white bg-opacity-70 shadow-xl">
     <div class="flex-1">
         @auth
             <a wire:navigate href="/user-dashboard" class="btn btn-ghost text-xl">Bajara Bookstore Test</a>

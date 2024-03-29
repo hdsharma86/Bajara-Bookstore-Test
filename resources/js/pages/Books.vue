@@ -1,10 +1,14 @@
 <template>
     <DefaultLayout>
-        <h1 class="text-2xl font-bold">Books</h1>
-        <div class="flex justify-end text-right">
-          <router-link to="/admin/add-book">
-            <button class="btn btn-outline btn-sm">+ Add New</button>
-          </router-link>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="text-left">
+            <h1 class="text-2xl font-bold">Books</h1>
+          </div>
+          <div class="text-right">
+            <router-link to="/admin/add-book">
+              <button class="btn btn-outline btn-sm">+ Add New</button>
+            </router-link>
+          </div>
         </div>
         <div class="overflow-x-auto border-2 mt-9">
           <table class="table">
@@ -21,7 +25,9 @@
             <tbody>
               <tr v-for="(book, index) in books">
                 <th>{{ index + 1 }}</th>
-                <td>{{ book.name }}</td>
+                <td>
+                  {{ book.name }}
+                </td>
                 <td>{{ truncate(book.description, 30) }}</td>
                 <td>{{ book.price }}</td>
                 <td>
@@ -34,11 +40,12 @@
               </tr>
             </tbody>
           </table>
-        </div>   
-        <div class="pt-2">
+        </div>  
+        <div class="text-right">
           <v-pagination
             v-model="page"
             :length="pageCount"
+            class="pagination"
           ></v-pagination>
         </div>
     </DefaultLayout>
@@ -87,3 +94,9 @@ onMounted(() => {
   getBooks();
 })
 </script>
+<style>
+.pagination {
+  display: flex;
+  justify-content: end;
+}
+</style>

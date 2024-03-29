@@ -8,9 +8,9 @@
         @vite('resources/css/app.css')
     </head>
     <body>
-        <div>
+        <div class="bg-gray-300">
             @livewire('navigation')
-            <div>
+            <div >
                 {{ $slot }}
             </div>
         </div>

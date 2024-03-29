@@ -27,6 +27,7 @@ class Favourite extends Component
 
     public function loadUserBooks(){
         $userId = Auth::id();
+        //$item = User::with('books')->get()->find()->items->find(2)->pivot->favorite;
         $user = User::find($userId);
         $this->books = $user->books;
     }

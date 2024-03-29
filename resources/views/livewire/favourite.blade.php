@@ -5,8 +5,17 @@
                 <div class="grid grid-cols-4 gap-2">
                     @foreach ($books as $book)
                         <div class="card bg-base-100 shadow-xl">
-                            <figure><img src="/img/book.jpg"
-                                    alt="Shoes" /></figure>
+                            @if (count($book->images) > 0)
+                                @foreach($book->images as $image)
+                                <figure>
+                                    <img src="/img/{{$image->name}}" alt="Book" />
+                                </figure>
+                                @endforeach
+                            @else
+                                <figure>
+                                    <img src="/img/book.jpg" alt="Book" />
+                                </figure>
+                            @endif
                             <div class="card-body">
                                 <h2 class="card-title">{{ $book->name }}</h2>
                                 <p>{{ Str::limit($book->description, $limit = 30, $end = '...') }}</p>

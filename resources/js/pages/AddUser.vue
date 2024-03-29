@@ -7,13 +7,13 @@
                 <form @submit.prevent="saveUser" class="w-full mx-auto">
                     <div class="space-y-4">
                       <div>
-                        <input v-model="formData.name" type="text" placeholder="Name" class="input input-bordered w-full max-w-xs" />
+                        <input v-model="formData.name" type="text" placeholder="Name" class="input input-bordered w-full max-w-xs border-solid" />
                       </div>
                       <div>
-                        <input v-model="formData.email" type="text" placeholder="Email" class="input input-bordered w-full max-w-xs" />
+                        <input v-model="formData.email" type="text" placeholder="Email" class="input input-bordered w-full max-w-xs border-solid" />
                       </div>
                       <div>
-                        <input v-model="formData.password" type="password" placeholder="Password" class="input input-bordered w-full max-w-xs" />
+                        <input v-model="formData.password" type="password" placeholder="Password" class="input input-bordered w-full max-w-xs border-solid" />
                       </div>
                 
                       <!-- Submit Button -->

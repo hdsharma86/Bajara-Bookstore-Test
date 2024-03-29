@@ -5,25 +5,28 @@
             <div class="hero-content text-center">
                 <form autocomplete="off" @submit.prevent="updateUser" class="w-full mx-auto">
                     <div class="space-y-4">
-                      <div>
-                        <input v-model="formData.name" type="text" placeholder="Name" class="input input-bordered w-full max-w-xs" />
-                      </div>
-                      <div>
-                        <input disabled v-model="formData.email" type="text" placeholder="Email" class="input input-bordered w-full max-w-xs" />
-                      </div>
-                      <div>
-                        <input v-model="formData.password" type="password" placeholder="Password" class="input input-bordered w-full max-w-xs" />
-                      </div>
-                      <div>
-                        <router-link to="/admin/users">
-                            <button type="submit" class="btn btn-outline">Cancel</button>
-                        </router-link>
-                        <button type="submit" class="btn btn-outline">Update User</button>
-                      </div>
+                        <div>
+                            <input v-model="formData.name" type="text" placeholder="Name"
+                                class="input input-bordered w-full max-w-xs border-solid" />
+                        </div>
+                        <div>
+                            <input disabled v-model="formData.email" type="text" placeholder="Email"
+                                class="input input-bordered w-full max-w-xs border-solid" />
+                        </div>
+                        <div>
+                            <input v-model="formData.password" type="password" placeholder="Password"
+                                class="input input-bordered w-full max-w-xs border-solid" />
+                        </div>
+                        <div>
+                            <router-link to="/admin/users">
+                                <button type="submit" class="btn btn-outline">Cancel</button>
+                            </router-link>
+                            <button type="submit" class="btn btn-outline">Update User</button>
+                        </div>
                     </div>
-                  </form>
+                </form>
             </div>
-        </div>   
+        </div>
     </DefaultLayout>
 </template>
 <script setup>
@@ -45,7 +48,7 @@ const updateUser = () => {
     axiosClient.post('/users', formData).then((response) => {
         router.push('/admin/users');
     })
-    axiosClient.put('/users/'+route.params.id, formData).then((response) => {
+    axiosClient.put('/users/' + route.params.id, formData).then((response) => {
         router.push('/admin/users');
     }).catch((error) => {
         console.log(error);
@@ -54,7 +57,7 @@ const updateUser = () => {
 
 const getUserDetail = () => {
     const userId = route.params.id;
-    axiosClient.post('/user', {'id': userId}).then((response) => {
+    axiosClient.post('/user', { 'id': userId }).then((response) => {
         const data = response.data[0];
         formData.name = data.name;
         formData.email = data.email;

@@ -10,6 +10,21 @@ use App\Livewire\BookDetail;
 use App\Livewire\Favourite;
 use App\Http\Controllers\AdminController;
 
+use App\Livewire\Admin\Login as LivewireAdminLogin;
+use App\Livewire\Admin\Dashboard as LivewireAdminDashboard;
+
+/**
+ * Livewire Admin Panel Routes Here...
+ */
+Route::prefix('livewire-admin')->group(function () {
+    Route::get('/', LivewireAdminLogin::class)->name('livewire-admin.login');
+    Route::get('/login', LivewireAdminLogin::class)->name('livewire-admin.login');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/logout', LivewireAdminLogin::class)->name('livewire-admin.logout');
+        Route::get('/dashboard', LivewireAdminDashboard::class)->name('livewire-admin.dashboard');
+    });
+});
+
 Route::get('/', Home::class);
 Route::get('/login', Login::class)->name('login');
 Route::get('/register', Register::class);

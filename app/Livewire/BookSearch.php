@@ -22,7 +22,7 @@ class BookSearch extends Component
     }
 
     public function loadBooks(){
-        $this->books = Book::all();
+        $this->books = Book::with('images')->get();
         if (Auth::check()) {
             $user = Auth::user()->load('books');
             $this->favBooks = $user->books;
@@ -49,7 +49,7 @@ class BookSearch extends Component
      */
     public function search(){
         $inputQuery = $this->query;
-        $books = Book::query()
+        $books = Book::with('images')->query()
         ->when($inputQuery, function ($query) use ($inputQuery) {
             if($inputQuery !== ''){
                 return $query->where('name', 'LIKE', "%$inputQuery%")

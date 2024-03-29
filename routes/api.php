@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/books/{book}', [BookController::class, 'update']);
     Route::delete('/books/{book}', [BookController::class, 'delete']);
 
+    Route::put('/profile/{user}', [UserController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
