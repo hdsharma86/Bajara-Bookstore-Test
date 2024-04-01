@@ -3,7 +3,7 @@
     <div class="card">
         <form wire:submit.prevent="search">
             <div class="join w-40">
-                <input name="query" class="input input-bordered join-item border-solid" placeholder="Search"/>
+                <input name="query" wire:model="query" class="input input-bordered join-item border-solid" placeholder="Search"/>
                 <button type="submit" class="btn join-item border-solid">Search</button>
             </div>
         </form>

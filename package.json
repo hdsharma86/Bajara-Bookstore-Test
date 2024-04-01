@@ -16,6 +16,8 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^5.0.4",
+        "alpinejs": "^3.13.7",
+        "sweetalert2": "^11.10.7",
         "vue": "^3.4.21",
         "vue-loader": "^17.4.2",
         "vue-router": "^4.3.0",

@@ -32,7 +32,7 @@ class Login extends Component
             'type' => 'user'
         ];
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('customer')->attempt($credentials)) {
             // Authentication passed
             return redirect()->intended('/user-dashboard');
         } else {
@@ -45,8 +45,7 @@ class Login extends Component
      * User logout here
      */
     public function logout(){
-        Auth::logout();
-        // Redirect to the login page after logout...
+        Auth::guard('customer')->logout();
         return redirect()->intended('/login');
     }
 }

@@ -28,9 +28,9 @@ class Login extends Component
             'type' => 'admin'
         ];
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             // Authentication passed
-            return redirect()->intended('/livewire-admin/dashboard');
+            return redirect()->intended('/livewire-admin/users');
         } else {
             // Authentication failed
             session()->flash('error', 'Invalid credentials.');
@@ -40,10 +40,17 @@ class Login extends Component
     /**
      * User logout here
      */
-    public function logout(){
-        Auth::logout();
-        // Redirect to the login page after logout...
-        return redirect()->intended('/livewire-admin/login');
+    public function adminLogout(){
+        if(Auth::guard('admin')->check()) {
+            //dd("Test2");
+            Auth::guard('admin')->logout();
+            return redirect()->route('livewire-admin.login');
+        }
+        //return redirect()->intended('/livewire-admin/login');
+    }
+
+    public function mount(){
+        
     }
 
     public function render()

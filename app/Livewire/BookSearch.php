@@ -49,16 +49,15 @@ class BookSearch extends Component
      */
     public function search(){
         $inputQuery = $this->query;
-        $books = Book::with('images')->query()
-        ->when($inputQuery, function ($query) use ($inputQuery) {
-            if($inputQuery !== ''){
-                return $query->where('name', 'LIKE', "%$inputQuery%")
-                        ->orWhere('description', 'LIKE', "%$inputQuery%");
-            }
-        })
-        ->orderBy('id', 'DESC')
-        ->get();
-        $this->books = $books;
+        if($inputQuery !== ''){
+            $books = Book::with('images')->where('name','LIKE','%'.$inputQuery.'%')
+                ->orWhere('description','LIKE','%'.$inputQuery.'%')
+                ->get();
+            $this->books = $books;
+        } else {
+            $books = Book::with('images')->get();
+            $this->books = $books;
+        }
         return $this->books;
     }
 

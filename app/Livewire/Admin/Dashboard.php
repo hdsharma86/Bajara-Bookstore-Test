@@ -8,6 +8,6 @@ class Dashboard extends Component
 {
     public function render()
     {
-        return view('livewire.admin.dashboard')->layout('components.layouts.admin.admin');;
+        return view('livewire.admin.dashboard')->layout('components.layouts.admin.admin');
     }
 }
