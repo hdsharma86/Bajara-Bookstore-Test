@@ -8,6 +8,7 @@ use App\Livewire\UserDashboard;
 use App\Livewire\Profile;
 use App\Livewire\BookDetail;
 use App\Livewire\Favourite;
+use App\Livewire\ForgotPassword;
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\CustomerAuth;
 
@@ -22,6 +23,7 @@ use App\Livewire\Admin\AddUser as LivewireAdminAddUser;
 use App\Livewire\Admin\AddBook as LivewireAdminAddBook;
 use App\Livewire\Admin\UpdateBook as LivewireAdminUpdateBook;
 use App\Livewire\Admin\Profile as LivewireAdminProfile;
+
 /**
  * Livewire Admin Panel Routes Here...
  */
@@ -47,6 +49,8 @@ Route::prefix('livewire-admin')->group(function () {
 Route::get('/', Home::class);
 Route::get('/login', Login::class)->name('login');
 Route::get('/register', Register::class)->name('register');
+Route::get('/forgot-password', ForgotPassword::class)->name('forgot-password');
+
 Route::middleware(['customer_auth'])->group(function () {
     Route::get('/user-logout', [Login::class, 'logout']);
     Route::get('/user-profile', Profile::class);

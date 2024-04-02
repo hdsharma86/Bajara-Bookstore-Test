@@ -22,7 +22,7 @@ class BookSearch extends Component
     }
 
     public function loadBooks(){
-        $this->books = Book::with('images')->get();
+        $this->books = Book::with('images')->orderBy('id', 'DESC')->get();
         if (Auth::check()) {
             $user = Auth::user()->load('books');
             $this->favBooks = $user->books;
@@ -52,10 +52,11 @@ class BookSearch extends Component
         if($inputQuery !== ''){
             $books = Book::with('images')->where('name','LIKE','%'.$inputQuery.'%')
                 ->orWhere('description','LIKE','%'.$inputQuery.'%')
+                ->orderBy('id', 'DESC')
                 ->get();
             $this->books = $books;
         } else {
-            $books = Book::with('images')->get();
+            $books = Book::with('images')->orderBy('id', 'DESC')->get();
             $this->books = $books;
         }
         return $this->books;

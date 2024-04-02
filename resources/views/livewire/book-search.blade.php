@@ -18,7 +18,11 @@
                     @if (count($book->images) > 0)
                         @foreach($book->images as $image)
                         <figure>
-                            <img src="/img/{{$image->name}}" alt="Book" />
+                            @if(file_exists(public_path('img/'.$image->name)))
+                                <img src="/img/{{$image->name}}" alt="Book" />
+                            @else
+                                <img src="/img/book.jpg" alt="Book" />
+                            @endif
                         </figure>
                         @endforeach
                     @else

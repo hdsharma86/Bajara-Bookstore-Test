@@ -43,6 +43,17 @@
             <input wire:model='image' class="@error('image') border-red-500 @else border-gray-700 @enderror border rounded w-full py-2 px-3 text-gray-700 mb-3" id="image" type="file">
             @error('image') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>
+        <div class="mb-3">
+            @if ($this->uploadedImage || $image)
+                @if ($image)
+                    <img src="{{ $image->temporaryUrl() }}">
+                @else
+                    @if(file_exists(public_path('img/'.$this->uploadedImage->name)))
+                        <img src="/img/{{ $this->uploadedImage->name }}" />
+                    @endif
+                @endif
+            @endif
+        </div>
         <div class="flex items-center justify-end">
             <button wire:click='cancelUpdateBook()' class="btn btn-outline btn-sm font-bold py-2 px-4 rounded">Cancel</button>
             <button type="submit" class="btn btn-outline btn-sm font-bold py-2 px-4 rounded ml-3">Save</button>

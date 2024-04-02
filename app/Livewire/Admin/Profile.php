@@ -29,6 +29,11 @@ class Profile extends Component
         session()->flash('message', 'Profile updated successfully!');
     }
 
+    public function cancelProfile(){
+        $this->reset();
+        return redirect()->route('livewire-admin.dashboard');
+    }
+
     public function mount()
     {
         $this->user = Auth::guard('admin')->user();

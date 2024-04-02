@@ -15,6 +15,7 @@
                     @error('password') <span class="error text-red-600">{{ $message }}</span> @enderror
                 </div>
                 <button type="submit" class="btn">Login</button>
+                <a wire-navigate href="/forgot-password" class="text-sm underline">Forgot Password</a>
             </form>
         </div>
         <div class="card-actions justify-end mr-9 mb-3">

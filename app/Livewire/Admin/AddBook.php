@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use App\Models\Book;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class AddBook extends Component
 {
@@ -16,20 +17,12 @@ class AddBook extends Component
     public $price;
     public $image;
 
-    public function handleDrop($fileList)
-    {
-        dd('Hello');
-        foreach ($fileList as $file) {
-            $this->image = $file;
-        }
-    }
-
     protected function rules(){
         return [
             'name' => 'required|min:3',
             'description' => 'required',
             'price' => 'required',
-            'image' => 'image|max:2048',
+            'image' => 'image',
         ];
     }
 
@@ -38,20 +31,19 @@ class AddBook extends Component
         $this->validateOnly('image');
     }
 
-    public function saveBook(){
+    public function saveBook(Request $request){
+
         $data = $this->validate();
+
         if($this->image){
             $imageExtension = $this->image->extension();
             $imageName = time().'.'.$imageExtension;
         }
-
+        
         if($this->image){
             try {
-                //$this->image->storeAs('public/img', $imageName);
-                //$this->image->move('public/img', $imageName);
-                $this->image->store('public');
+                $this->image->storeAs('img', $imageName);
             } catch (\Exception $e) {
-                //dd($imageName);
                 dd($e->getMessage());
             }
         }

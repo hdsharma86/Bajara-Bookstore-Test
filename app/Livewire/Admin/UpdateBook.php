@@ -19,13 +19,14 @@ class UpdateBook extends Component
     public $description;
     public $price;
     public $image;
+    public $uploadedImage;
 
     protected function rules(){
         return [
             'name' => 'required|min:3',
             'description' => 'required',
             'price' => 'required',
-            //'image' => 'image|max:2048',
+            'image' => 'image|max:2048',
         ];
     }
 
@@ -66,7 +67,11 @@ class UpdateBook extends Component
                 ];
                 $image->update($imageData);
                 if($this->image){
-                    $this->image->move(public_path('img'), $imageName);
+                    try {
+                        $this->image->storeAs('img', $imageName);
+                    } catch (\Exception $e) {
+                        dd($e->getMessage());
+                    }
                 }
             }
         } else {
@@ -75,14 +80,18 @@ class UpdateBook extends Component
                     'name' => $imageName,
                     'path' => $imageName
                 ]);
-                $this->image->move(public_path('img'), $imageName);
+                try {
+                    $this->image->storeAs('img', $imageName);
+                } catch (\Exception $e) {
+                    dd($e->getMessage());
+                }
                 $book->images()->sync($image->id);
             }
         }
 
         session()->flash('message', 'Book updated successfully!');
         $this->reset();
-
+        
         return redirect()->route('livewire-admin.books');
     }
 
@@ -93,10 +102,11 @@ class UpdateBook extends Component
 
     public function mount(){
         $this->bookId = Route::current()->parameter('id');
-        $this->book = Book::find($this->bookId);
+        $this->book = Book::with('images')->find($this->bookId);
         $this->name = $this->book->name;
         $this->description = $this->book->description;
         $this->price = $this->book->price;
+        $this->uploadedImage = $this->book->images[0];
     }
 
     public function render()

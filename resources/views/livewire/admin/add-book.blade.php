@@ -36,36 +36,22 @@
             <input wire:model='price' class="@error('price') border-red-500 @else border-gray-700 @enderror border rounded w-full py-2 px-3 text-gray-700 mb-3" id="price" type="number" placeholder="0.00">
             @error('price') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>
-        <!--div class="mb-6">
+        <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
                 Image
             </label>
             <input wire:model='image' class="@error('image') border-red-500 @else border-gray-700 @enderror border rounded w-full py-2 px-3 text-gray-700 mb-3" id="image" type="file">
             @error('image') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
-        </div-->
-
-        <div 
-            id="dropzone" 
-            class="border border-gray-300 p-10 text-center cursor-pointer"
-            wire:ignore
-        >
-            <div>Drag & Drop Images Here</div>
-            <div class="mt-2">or</div>
-            <input 
-                type="file" 
-                id="fileInput" 
-                accept="image/*"
-                class="hidden"
-                wire:model="image"
-                multiple
-            >
-            <label for="fileInput" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">Select Images</label>
         </div>
+
         <div class="flex items-center justify-end">
             <button wire:click='cancelAddBook()' class="btn btn-outline btn-sm font-bold py-2 px-4 rounded">Cancel</button>
             <button type="submit" class="btn btn-outline btn-sm font-bold py-2 px-4 rounded ml-3">Save</button>
         </div>
-        <button wire:click="$emit('test')" >Hello</button>
+        @if ($image)
+            Photo Preview:
+            <img src="{{ $image->temporaryUrl() }}">
+        @endif
     </form>
 </div>
 </div>
